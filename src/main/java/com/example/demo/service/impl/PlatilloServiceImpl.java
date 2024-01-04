@@ -19,7 +19,7 @@ public class PlatilloServiceImpl implements PlatilloService {
     @Override
     public String obtenerPlatillos() {
         LOGGER.info("entro al implement");
-        LOGGER.info(platilloRepository.findAll());
+        
         return "hola putillla";
     }
 }

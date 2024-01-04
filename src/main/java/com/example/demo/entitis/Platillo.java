@@ -6,9 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "platillos")  // Especifica el nombre de la tabla en la base de datos
+@Table(name = "platillos")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data  // Especifica el nombre de la tabla en la base de datos
 public class Platillo {
 
     @Id
