@@ -1,5 +1,5 @@
 package com.example.demo.service;
 
-public class PlatilloService {
-    
+public interface PlatilloService {
+    public String obtenerPlatillos();
 }
