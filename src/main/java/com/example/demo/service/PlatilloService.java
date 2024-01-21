@@ -7,5 +7,7 @@ import com.example.demo.dto.PlatilloDTO;
 public interface PlatilloService {
     public List<PlatilloDTO> obtenerPlatillos();
 
-    public PlatilloDTO agregarPlatillos(PlatilloDTO platilloDTO);
+    public List<PlatilloDTO> agregarPlatillos(PlatilloDTO platilloDTO);
+
+    public List<PlatilloDTO> eliminarPlatillo(Long keyx);
 }

@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -14,6 +13,7 @@ import com.example.demo.repository.PlatilloRepository;
 import com.example.demo.service.PlatilloService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+
 @Service
 public class PlatilloServiceImpl implements PlatilloService {
 
@@ -23,7 +23,7 @@ public class PlatilloServiceImpl implements PlatilloService {
 
     @Autowired
     PlatilloRepository platilloRepository;
-    
+
     @Override
     public List<PlatilloDTO> obtenerPlatillos() {
         // List<PlatilloDTO> platilloDTO = new ArrayList<PlatilloDTO>();
@@ -31,16 +31,55 @@ public class PlatilloServiceImpl implements PlatilloService {
         List<Platillo> platillo = platilloRepository.findAll();
         // platilloDTO
         // List<PlatilloDTO> platilloDTO = objectMapper.readValue(platillo,
-        //             PlatilloDTO[].class);
+        // PlatilloDTO[].class);
         List<PlatilloDTO> platilloDTO = List.of(objectMapper.convertValue(platillo, PlatilloDTO[].class));
         LOGGER.info(platilloDTO);
         return platilloDTO;
     }
 
-     @Override
-    public PlatilloDTO agregarPlatillos(PlatilloDTO platilloDTO) {
-        LOGGER.info("entro al service");
-        LOGGER.info("este es el dto {}", platilloDTO);
+    @Override
+    public List<PlatilloDTO> agregarPlatillos(PlatilloDTO platilloDTO) {
+        LOGGER.info("esto trae del front {}", platilloDTO);
+        try {
+            Platillo platillo = new Platillo();
+            if (platilloDTO.getKeyx() != null) {
+                // creo que esta consulta es inecesaria, pero la dejo aqui por si acaso
+                platillo = platilloRepository.findByKeyx(platilloDTO.getKeyx());
+            }
+
+            platillo.setCarreta(platilloDTO.getCarreta());
+            platillo.setDescripcion(platilloDTO.getDescripcion());
+            platillo.setNombre(platilloDTO.getNombre());
+            platillo.setPrecio(platilloDTO.getPrecio());
+
+            platilloRepository.save(platillo);
+
+            List<Platillo> platillos = platilloRepository.findAll();
+
+            List<PlatilloDTO> platillosDTO = List.of(objectMapper.convertValue(platillos, PlatilloDTO[].class));
+            return platillosDTO;
+        } catch (Exception e) {
+            LOGGER.error("Error al guardar el registro", e);
+        }
+        return null;
+    }
+
+    @Override
+    public List<PlatilloDTO> eliminarPlatillo(Long keyx) {
+        LOGGER.info("esto trae del front {}", keyx);
+        try {
+            Platillo platillo = new Platillo();
+
+            platillo = platilloRepository.findByKeyx(keyx);
+
+            platilloRepository.delete(platillo);
+
+            List<Platillo> platillos = platilloRepository.findAll();
+            List<PlatilloDTO> platillosDTO = List.of(objectMapper.convertValue(platillos, PlatilloDTO[].class));
+            return platillosDTO;
+        } catch (Exception e) {
+            LOGGER.error("Error al eliminar el registro", e);
+        }
         return null;
     }
 }

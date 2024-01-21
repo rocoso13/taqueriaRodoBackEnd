@@ -44,4 +44,10 @@ public class PlatillosController {
         LOGGER.info("entro al controlador");
         return new ApiResponseDTO(meta, service.agregarPlatillos(platilloDTO));
     }
+
+    @PostMapping("/eliminarPlatillo")
+    public ApiResponseDTO eliminarPlatillo(@RequestBody Long keyx) {
+        LOGGER.info("entro al controlador {}",keyx);
+        return new ApiResponseDTO(meta, service.eliminarPlatillo(keyx));
+    }
 }

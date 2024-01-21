@@ -10,4 +10,6 @@ import com.example.demo.entitis.Platillo;
 @Repository
 public interface PlatilloRepository extends JpaRepository<Platillo, Long> {
     List<Platillo> findAll();
+
+    Platillo findByKeyx(Long keyx);
 }
