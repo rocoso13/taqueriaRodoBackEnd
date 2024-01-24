@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.AgregarMesasDTO;
-import com.example.demo.dto.PlatilloDTO;
 import com.example.demo.entitis.AgregarMesas;
-import com.example.demo.entitis.Platillo;
 import com.example.demo.repository.AgregarMesasRepository;
 import com.example.demo.service.AgregarMesasService;
 import com.fasterxml.jackson.databind.ObjectMapper;
