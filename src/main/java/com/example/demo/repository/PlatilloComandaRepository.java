@@ -8,5 +8,5 @@ import com.example.demo.entitis.PlatilloComanda;
 
 @Repository
 public interface PlatilloComandaRepository extends JpaRepository<PlatilloComanda, Long> {
-    List<PlatilloComanda> findByIdComandaAndEstatus(String idComanda, String estatus);
+    List<PlatilloComanda> findByIdComanda(String idComanda);
 }

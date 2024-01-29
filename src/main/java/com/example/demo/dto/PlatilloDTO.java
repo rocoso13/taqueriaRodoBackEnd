@@ -13,4 +13,5 @@ public class PlatilloDTO {
     private String descripcion;
     private String nombre;
     private double precio;
+    private int cantidad;
 }

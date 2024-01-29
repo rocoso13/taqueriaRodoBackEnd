@@ -11,7 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "platillocomanda")
+@Table(name = "platilloscomanda")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -33,4 +33,13 @@ public class PlatilloComanda {
 
     @Column(name = "precio")
     private double precio;
+
+    @Column(name = "cantidad")
+    private int cantidad;
+
+    @Column(name = "carreta")
+    private int carreta;
+
+    @Column(name = "descripcion")
+    private String descripcion;
 }

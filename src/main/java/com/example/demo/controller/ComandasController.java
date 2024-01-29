@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.dto.ApiResponseDTO;
 import com.example.demo.dto.ComandaDTO;
+import com.example.demo.dto.PedidoDTO;
 import com.example.demo.service.ComandaService;
 import com.example.demo.util.Meta;
 
@@ -30,6 +31,12 @@ public class ComandasController {
     public ApiResponseDTO obtenerComanda(@RequestBody ComandaDTO comandaDTO) {
         LOGGER.info("entro a obtener comanda {}",comandaDTO);
         return new ApiResponseDTO(meta, service.obtenerComanda(comandaDTO));
+    }
+
+    @PostMapping("/agregarComanda")
+    public ApiResponseDTO agregarComanda(@RequestBody PedidoDTO pedidoDTO) {
+        LOGGER.info("Este es el contenido de la comanda a guardar {}", pedidoDTO.getComandaDTO());
+        return new ApiResponseDTO(meta, service.agregarComanda(pedidoDTO));
     }
     
 }

@@ -8,5 +8,5 @@ import com.example.demo.entitis.Comanda;
 
 @Repository
 public interface ComandaRepository extends JpaRepository<Comanda, Long> {
-    Comanda findByKeyxAndEstatus(Integer keyx, String estatus);
+    Comanda findByKeyx(Integer keyx);
 }
