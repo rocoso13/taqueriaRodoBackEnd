@@ -44,7 +44,7 @@ public class ComandaServiceImpl implements ComandaService {
     Map<String, Object> hashMap = new HashMap<>();
 
     try {
-      Comanda comanda = comandaRepository.findByKeyx(comandaDTO.getKeyx());
+      Comanda comanda = comandaRepository.findByNombreCustomQuery(comandaDTO.getNumeroMesa(), "enviar");
       List<PlatilloComanda> platillosComanda = platilloComandaRepository.findByIdComanda(comandaDTO.getKeyx().toString());
       LOGGER.info("esto trae la consulta de comanda", comanda);
       hashMap.put("comanda", comanda);
@@ -71,6 +71,10 @@ public class ComandaServiceImpl implements ComandaService {
         //seteo de valores platilloscomanda
         for (PlatilloDTO platillo : pedidoDTO.getPlatillosComanda()) {
           PlatilloComanda platilloComanda = new PlatilloComanda();
+          if (comanda.getEstatus().equals("enviar")) {
+            LOGGER.info(platillo.getKeyx().intValue());
+            platilloComanda.setKeyx(platillo.getKeyx().intValue());
+          }
           platilloComanda.setCantidad(platillo.getCantidad());
           platilloComanda.setCarreta(platillo.getCarreta());
           platilloComanda.setDescripcion(platillo.getDescripcion());
@@ -80,8 +84,9 @@ public class ComandaServiceImpl implements ComandaService {
           platilloComanda.setPrecio(platillo.getPrecio());
           platillosComanda.add(platilloComanda);
         }
-        LOGGER.info("se pasaron a entidades {}, {}", comanda, platillosComanda);
+
         platilloComandaRepository.saveAll(platillosComanda);
+        LOGGER.info("se va aguardar la comanda {}", comanda);
         comandaRepository.save(comanda);
       } catch (Exception e) {
         LOGGER.error("Error al mapear la comanda", e);
