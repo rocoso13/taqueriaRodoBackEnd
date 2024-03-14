@@ -9,4 +9,6 @@ import com.example.demo.entitis.PlatilloComanda;
 @Repository
 public interface PlatilloComandaRepository extends JpaRepository<PlatilloComanda, Long> {
     List<PlatilloComanda> findByIdComanda(String idComanda);
+
+    List<PlatilloComanda> findByNumeroOrden(Integer numeroOrden);
 }

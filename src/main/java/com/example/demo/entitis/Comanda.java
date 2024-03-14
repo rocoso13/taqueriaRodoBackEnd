@@ -39,4 +39,7 @@ public class Comanda {
 
     @Column(name = "fechacierre")
     private LocalDateTime fechaCierre;
+
+    @Column(name = "numero_orden")
+    private Integer numeroOrden;
 }

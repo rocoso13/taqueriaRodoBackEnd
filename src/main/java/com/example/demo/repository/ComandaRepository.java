@@ -16,4 +16,9 @@ public interface ComandaRepository extends JpaRepository<Comanda, Long> {
 
     @Query(value = "SELECT * FROM comanda WHERE numeromesa = :numeroMesa AND estatus = :estatus", nativeQuery = true)
     Comanda findByNombreCustomQuery(@Param("numeroMesa") int numeroMesa, @Param("estatus") String estatus);
+
+    @Query(value = "SELECT MAX(numero_orden) + 1 FROM comanda", nativeQuery = true)
+    Integer obtenerNumeroOrden();
+
+    Comanda findByNumeroOrden(Integer numeroOrden);
 }

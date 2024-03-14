@@ -12,4 +12,5 @@ public class AgregarMesasDTO {
     private Integer estatus;
     private Integer habilitada;
     private Integer numeroMesa;
+    private Integer numeroOrden;
 }

@@ -14,4 +14,6 @@ public interface AgregarMesasRepository extends JpaRepository<AgregarMesas, Long
     List<AgregarMesas> findAll();
 
     AgregarMesas findByKeyx(Integer keyx);
+
+    AgregarMesas findByNumeroMesa(Integer numeroMesa);
 }

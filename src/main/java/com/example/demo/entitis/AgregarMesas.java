@@ -30,5 +30,8 @@ public class AgregarMesas {
 
     @Column(name = "estatus")
     private Integer estatus;
+
+    @Column(name = "numero_orden")
+    private Integer numeroOrden;
     
 }

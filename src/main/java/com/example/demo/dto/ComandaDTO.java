@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ComandaDTO {
-    private Integer keyx;
+    private Integer keyx = 0;
     private int numeroMesa;
     private String estatus;
     private String descripcion;
     private LocalDateTime fechaCreacion;
     private LocalDateTime fechaCierre;
+    private Integer numeroOrden = 0;
 }

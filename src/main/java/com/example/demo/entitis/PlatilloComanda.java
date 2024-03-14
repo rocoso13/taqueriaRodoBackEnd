@@ -42,4 +42,7 @@ public class PlatilloComanda {
 
     @Column(name = "descripcion")
     private String descripcion;
+
+    @Column(name = "numero_orden")
+    private Integer numeroOrden;
 }
