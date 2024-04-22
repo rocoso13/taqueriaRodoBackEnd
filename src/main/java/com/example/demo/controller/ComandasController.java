@@ -38,5 +38,4 @@ public class ComandasController {
         LOGGER.info("Este es el contenido de la comanda a guardar {}", pedidoDTO.getComandaDTO());
         return new ApiResponseDTO(meta, service.agregarComanda(pedidoDTO));
     }
-    
 }

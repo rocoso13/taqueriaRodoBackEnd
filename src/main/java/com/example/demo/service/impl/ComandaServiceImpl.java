@@ -49,12 +49,9 @@ public class ComandaServiceImpl implements ComandaService {
     Map<String, Object> hashMap = new HashMap<>();
     AgregarMesas agregarMesas = new AgregarMesas();
     try {
-      LOGGER.info("paso 1");
       agregarMesas = agregarMesasRepository.findByNumeroMesa(comandaDTO.getNumeroMesa());
-      LOGGER.info("paso 2 {}", agregarMesas);
       // Comanda comanda = comandaRepository.findByNombreCustomQuery(comandaDTO.getNumeroMesa(), "enviar");
       Comanda comanda = comandaRepository.findByNumeroOrden(agregarMesas.getNumeroOrden());
-      LOGGER.info("paso 3");
       List<PlatilloComanda> platillosComanda = platilloComandaRepository.findByNumeroOrden(agregarMesas.getNumeroOrden());
       LOGGER.info("esto trae la consulta de comanda", comanda);
       hashMap.put("comanda", comanda);
@@ -80,10 +77,11 @@ public class ComandaServiceImpl implements ComandaService {
         comanda = objectMapper.convertValue(pedidoDTO.getComandaDTO(), Comanda.class);
         // platillosComanda = List.of(objectMapper.convertValue(pedidoDTO.getPlatillosComanda(), PlatilloComanda[].class));
         //seteo de valores platilloscomanda
+        LOGGER.info("comanda mapeada {}", comanda);
         for (PlatilloDTO platillo : pedidoDTO.getPlatillosComanda()) {
           PlatilloComanda platilloComanda = new PlatilloComanda();
           if (comanda.getEstatus().equals("enviar")) {
-            if (comanda.getNumeroOrden() == 0 || comanda.getNumeroOrden() == null) {
+            if ( comanda.getNumeroOrden() == null) {
               comanda.setNumeroOrden(comandaRepository.obtenerNumeroOrden() == null ? 0 : comandaRepository.obtenerNumeroOrden());
               agregarMesas = agregarMesasRepository.findByNumeroMesa(pedidoDTO.getComandaDTO().getNumeroMesa());
               agregarMesas.setNumeroOrden(comanda.getNumeroOrden());
@@ -91,7 +89,6 @@ public class ComandaServiceImpl implements ComandaService {
             }
             LOGGER.info(platillo.getKeyx().intValue());
             platilloComanda.setKeyx(platillo.getKeyx().intValue());
-            LOGGER.info("paso 1");
             LOGGER.info("consulta {}", comandaRepository.obtenerNumeroOrden());
             platilloComanda.setNumeroOrden(comanda.getNumeroOrden());
           }
@@ -104,17 +101,18 @@ public class ComandaServiceImpl implements ComandaService {
           platilloComanda.setPrecio(platillo.getPrecio());
           platillosComanda.add(platilloComanda);
         }
-        LOGGER.info("aquii trono");
+
         platilloComandaRepository.saveAll(platillosComanda);
         LOGGER.info("se va aguardar la comanda {}", comanda);
         comandaRepository.save(comanda);
       } catch (Exception e) {
         LOGGER.error("Error al mapear la comanda", e);
       }
+      hashMap.put("comanda", comanda);
     } catch (Exception e) {
       LOGGER.error("Error al grabar la comanda", e);
     }
     
-    return null;
+    return hashMap;
   }
 }
