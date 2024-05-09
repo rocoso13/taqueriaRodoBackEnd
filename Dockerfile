@@ -1,6 +1,6 @@
 FROM openjdk:21-jdk
 
-EXPOSE 8089
+EXPOSE 8100
 
 LABEL author=kevin.rojo
 
